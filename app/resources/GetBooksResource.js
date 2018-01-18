@@ -11,8 +11,9 @@
         const hp = new Book(3, 'Harry Potter', 'JK Rowling', 'Fantasy', '2001-09-11', 100, 'The story about a magic boy');
         
         const books = [bible, foundation, hp];
-        
-        console.log(books);
+        const json = JSON.stringify(books);
+
+        console.log(json);
         return bible;
     };
 

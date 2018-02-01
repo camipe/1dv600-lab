@@ -14,7 +14,7 @@
         const json = JSON.stringify(books);
 
         console.log(json);
-        return bible;
+        callback(json)
     };
 
 }());

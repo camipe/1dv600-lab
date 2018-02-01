@@ -1,6 +1,11 @@
 {
   "name": "lnu-book-library",
   "version": "1.0.0",
+  "license": "UNLICENSED",
+  "repository" :
+  { "type" : "git"
+  , "url" : "https://github.com/camipe/1dv600-lab"
+  },
   "scripts": {
     "start": "nodemon ./app.js",
     "test": "mocha --reporter spec",

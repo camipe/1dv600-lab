@@ -24,11 +24,17 @@
             });
         },
 
-        // Write the entire file from the file system.
+        // Write the entire file to the file system.
         writeXMLFile: function(data) {
             var builder = new xml2js.Builder();
-            var xml = builder.buildObject(data[0]);
-            console.log(xml);
+            var xml = builder.buildObject(data);
+
+            fs.writeFile(process.env.PWD + '/books.xml', xml, function(err) {
+                if(err) {
+                    return console.log(err);
+                }          
+                console.log("The file was saved!");
+            });
         }
     };
 

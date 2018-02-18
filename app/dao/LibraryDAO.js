@@ -32,7 +32,7 @@
         // Get the entire file from the file system.
         readXMLFile: function(callback) {
             var parser = new xml2js.Parser();
-            
+
             fs.readFile(process.env.PWD + '/books.xml', function(err, data) {
                 parser.parseString(data, function (err, result) {
                     var bookArray = convertToBooks(result);

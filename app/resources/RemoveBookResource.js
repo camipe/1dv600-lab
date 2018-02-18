@@ -10,15 +10,11 @@
         var updatedBooks = books.filter((book) => {
             return book.$.id !== id
         });
-
-        console.log(updatedBooks);
         xml.catalog.book = updatedBooks;
         return xml;
     };
 
     module.exports = function (id, callback) {
-
-
         // read file
         LibraryDAO.readXMLFile(( result ) => {
             var updatedBooks = removeBookFromXML(result, id);

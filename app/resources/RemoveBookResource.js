@@ -3,20 +3,22 @@
 
     var LibraryDAO = require('../dao/LibraryDAO');
 
-
     module.exports = function (id, callback) {
 
 
         // read file
         LibraryDAO.readXMLFile(( books ) => {
+            // remove book with specified id
             var updatedBooks = books.filter((book) => {
                 return book.id !== id
             });
-            console.log(updatedBooks);
+
+            LibraryDAO.writeXMLFile(updatedBooks);
+            
             callback();
         });
 
-        // remove object by id
+        
 
         // write file
 

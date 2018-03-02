@@ -38,7 +38,7 @@ describe("Automated Unit Tests", () => {
 
     it("Removed book from object representation of XML-file", () => {
       var bookId = "9";
-      var xmlObject = data.original;
+      var xmlObject = data.short;
       var expectedResult = data.bookId9Deleted;
       
       var result = helpers.removeBookFromXML(xmlObject, bookId);
@@ -51,7 +51,7 @@ describe("Automated Unit Tests", () => {
 
     it("Added book to object representation of XML-file", () => {
       var book = new Book("11", "Harry Potter and The Prisoner of Azkaban", "J. K. Rowling", "Fantasy", "1999-07-08", "199", "A story about a wizard boy.");
-      var xmlObject = data.original;
+      var xmlObject = data.short;
       var expectedResult = data.bookAdded;
 
       var result = helpers.addBookToXML();

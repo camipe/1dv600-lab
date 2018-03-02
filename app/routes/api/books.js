@@ -47,7 +47,8 @@
 
         .delete(function (req, res) {
             res.type('json');
-            RemoveBookResource(req.params.bookId, function () {
+            RemoveBookResource(req.params.bookId, function (statusCode) {
+                res.statusCode = statusCode;
                 res.send("{}");
             });
         });

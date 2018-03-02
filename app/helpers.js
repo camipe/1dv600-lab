@@ -1,5 +1,13 @@
 "use strict";
 
+exports.checkIfBookExistsInXML = (xml, id, callback) => {
+  var exists =  xml.catalog.book.some(book => {
+    return book.$.id === id;
+  });
+ 
+  callback(exists);
+}
+
 exports.removeBookFromXML = ( xml, id ) => {
   var books = xml.catalog.book;
   

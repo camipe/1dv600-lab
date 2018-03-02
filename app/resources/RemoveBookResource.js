@@ -3,21 +3,12 @@
 
     var LibraryDAO = require('../dao/LibraryDAO');
 
-    var removeBookFromXML = ( xml, id ) => {
-        var books = xml.catalog.book;
-        
-        // remove book with specified id
-        var updatedBooks = books.filter((book) => {
-            return book.$.id !== id
-        });
-        xml.catalog.book = updatedBooks;
-        return xml;
-    };
+    var helpers = require('../helpers');
 
     module.exports = function (id, callback) {
         // read file
         LibraryDAO.readXMLFile(( result ) => {
-            var updatedBooks = removeBookFromXML(result, id);
+            var updatedBooks = helpers.removeBookFromXML(result, id);
            
             LibraryDAO.writeXMLFile(updatedBooks);
             

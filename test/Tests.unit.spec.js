@@ -1,9 +1,13 @@
 "use strict";
 var expect  = require('chai').expect;
 var Book = require('../app/dao/Book');
-var removeBookFromXML = require('../app/resources/RemoveBookResource').removeBookFromXML;
+var helpers = require('../app/helpers');
 var LibraryDAO = require('../app/dao/LibraryDAO');
+var fs = require('fs');
 
+// load test data
+var raw = fs.readFileSync(process.env.PWD + '/test/Testdata.json');
+var data = JSON.parse(raw);
 
 describe("Automated Unit Tests", () => {
 
@@ -30,60 +34,30 @@ describe("Automated Unit Tests", () => {
       });
   });
 
-  //   describe("Unit Test 2 - removeBookFromXML", () => {
+  describe("Unit Test 2 - removeBookFromXML", () => {
 
-  //     it("Removed book from object representation of XML-file", (done) => {
-  //       var bookId = 3;  
-  //       var xml = LibraryDAO.readXMLFile( () => {
-  //         return removeBookFromXML(xml, bookId);
-  //         });
-          
-  //         var result = removeBookFromXML(xml, bookId);
+    it("Removed book from object representation of XML-file", () => {
+      var bookId = "9";
+      var xmlObject = data.original;
+      var expectedResult = data.bookId9Deleted;
+      
+      var result = helpers.removeBookFromXML(xmlObject, bookId);
 
-  //         expect(result).to.equal(6);
-
-  //     });
-  // });
+      expect(JSON.stringify(result)).to.equal(JSON.stringify(expectedResult));
+    });
+  });
 
   describe("Unit Test 3 - addBookToXML", () => {
 
     it("Added book to object representation of XML-file", () => {
-        var a = 2;
-        var b = 4;
+      var book = new Book("11", "Harry Potter and The Prisoner of Azkaban", "J. K. Rowling", "Fantasy", "1999-07-08", "199", "A story about a wizard boy.");
+      var xmlObject = data.original;
+      var expectedResult = data.bookAdded;
 
-        var result = 5;
+      var result = helpers.addBookToXML();
 
-        expect(result).to.equal(6);
+      expect(JSON.stringify(result)).to.equal(JSON.stringify(expectedResult));
 
     });
-  });
-});
-
-describe("Automated API Tests", () => {
-
-  describe("Automated API Test 1 - Get Books", () => {
-
-      it("describe..", () => {
-          var a = 2;
-          var b = 4;
-
-          var result = 5;
-
-          expect(result).to.equal(6);
-
-      });
-  });
-
-    describe("Automated API Test 2 - Delete Books", () => {
-
-      it("describe..", () => {
-          var a = 2;
-          var b = 4;
-
-          var result = 5;
-
-          expect(result).to.equal(6);
-
-      });
   });
 });

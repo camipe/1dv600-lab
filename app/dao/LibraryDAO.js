@@ -32,8 +32,7 @@
             fs.writeFile(process.env.PWD + '/books.xml', xml, function(err) {
                 if(err) {
                     return console.log(err);
-                }          
-                console.log("The file was saved!");
+                };
             });
         }
     };

@@ -26,8 +26,9 @@
     router.put('/', helpers.validateBook, function (req, res) {
         res.type('json');
 
-        AddBookResource(req.body, function () {
-            res.send({});
+        AddBookResource(req.body, function (newBook) {
+            res.statusCode = 201;
+            res.send(newBook);
         });
     });
 

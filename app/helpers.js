@@ -8,6 +8,17 @@ exports.checkIfBookExistsInXML = (xml, id, callback) => {
   callback(exists);
 }
 
+exports.getLastUsedId = (xml) => {
+  var ids = xml.catalog.book.map(book => {
+    return Number(book.$.id);
+  })
+
+  ids.sort(function(a, b) {
+    return b - a;
+  });
+  return ids[0];
+}
+
 exports.removeBookFromXML = ( xml, id ) => {
   var books = xml.catalog.book;
   

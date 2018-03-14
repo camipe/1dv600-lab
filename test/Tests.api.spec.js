@@ -16,6 +16,8 @@ describe("Automated API Tests", () => {
       "price": "164",
       "description": "An hobbit on adventure."
     };
+
+    
     done();
   });
 
@@ -271,13 +273,22 @@ describe("Automated API Tests", () => {
   });
 
   describe("Automated API TEST 4 - Add new book successfully - PUT /api/books/", () => {
+    var expected = {
+      "id": "11",
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "publishDate": "1951-08-21",
+      "price": "164",
+      "description": "An hobbit on adventure."
+    }
 
     it("respond new book object and status 201 Created", (done) => {
       request(app)
               .put('/api/books/')
               .send(requestData)
               .set('Accept', 'application/json')
-              .expect(201, requestData, done);
+              .expect(201, expected, done);
     });
   });
 

@@ -12,7 +12,7 @@ describe("Automated API Tests", () => {
       "title": "The Hobbit",
       "author": "J.R.R. Tolkien",
       "genre": "Fantasy",
-      "publishDate": "1951-08-21",
+      "publish_date": "1951-08-21",
       "price": "164",
       "description": "An hobbit on adventure."
     };

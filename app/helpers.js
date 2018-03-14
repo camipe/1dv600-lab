@@ -31,15 +31,37 @@ exports.removeBookFromXML = ( xml, id ) => {
   return xml;
 };
 
-exports.addBookToXML = ( xml, book ) => {
-  return false;
+exports.addBookToXML = ( xml, book, callback ) => {
+  var xmlBook = {
+    "$": {
+      "id": book.id
+    },
+    "author": [
+      book.author
+    ],
+    "title": [
+      book.title
+    ],
+    "genre": [
+      book.genre
+    ],
+    "price": [
+      book.price
+    ],
+    "publish_date": [
+      book.publishDate
+    ],
+    "description": [
+      book.description
+    ]
+  }
+  console.log(xmlBook);
+  xml.catalog.book.push(xmlBook);
+  console.log(xml.catalog.book);
+  callback(xml);
 };
 
 exports.validateBook = ( req, res, next ) => {
-  
-  function isEmptyObject(obj) {
-    return !Object.keys(obj).length;
-  }
 
   if (req.body.title === "") {
     res.statusCode = 400;

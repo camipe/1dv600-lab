@@ -12,17 +12,14 @@
                 data.title, 
                 data.author, 
                 data.genre, 
-                data.publishDate, 
+                data.publish_date, 
                 data.price, 
                 data.description
             );
-
-            helpers.addBookToXML();
-            // convert book to xml
-            // add book to xmlobj
-            // save to xml
-            // return book object
-            callback(book);
+            helpers.addBookToXML(result, book, function(xml){
+                LibraryDAO.writeXMLFile(xml);
+                callback(book);
+            })
         });
     };
 

@@ -6,20 +6,28 @@ var LibraryDAO = require('../app/dao/LibraryDAO');
 var fs = require('fs');
 
 // load test data
-var raw = fs.readFileSync(process.env.PWD + '/test/Testdata.json');
-var data = JSON.parse(raw);
+
 
 describe("Automated Unit Tests", () => {
+  
+  var raw;
+  var data;
+
+  beforeEach(function(done) {
+    raw = fs.readFileSync(process.env.PWD + '/test/Testdata.json');
+    data = JSON.parse(raw);
+    done();
+  })
 
   describe("Unit Test 1 - Book Constructor", () => {
 
       it("Created new book object", () => {
-          var id = 7;
+          var id = "7";
           var title = "The Da Vinci Code";
           var author = "Dan Brown";
           var genre = "Mystery";
           var publishDate = "2003-04-02";
-          var price = 139;
+          var price = "139";
           var description = "The Da Vinci Code is a 2003 mystery-detective novel by Dan Brown.";
 
           var book = new Book(id, title, author, genre, publishDate, price, description);
@@ -54,7 +62,7 @@ describe("Automated Unit Tests", () => {
       var xmlObject = data.short;
       var expectedResult = data.bookAdded;
 
-      var result = helpers.addBookToXML();
+      var result = helpers.addBookToXML(xmlObject, book);
 
       expect(JSON.stringify(result)).to.equal(JSON.stringify(expectedResult));
 

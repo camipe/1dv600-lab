@@ -23,3 +23,29 @@ exports.removeBookFromXML = ( xml, id ) => {
 exports.addBookToXML = ( xml, book ) => {
   return false;
 };
+
+exports.validateBook = ( req, res, next ) => {
+  
+  function isEmptyObject(obj) {
+    return !Object.keys(obj).length;
+  }
+
+  if (req.body.title === "") {
+    res.statusCode = 400;
+    res.json({"status": "error", "message": "title is missing"});
+  } else if (req.body.author === "") {
+    res.statusCode = 400;
+    res.json({"status": "error", "message": "author is missing"});
+  } else if (req.body.genre === "") {
+    res.statusCode = 400;
+    res.json({"status": "error", "message": "genre is missing"});
+  } else if (req.body.publishDate === "") {
+    res.statusCode = 400;
+    res.json({"status": "error", "message": "publishDate is missing"});
+  } else if (req.body.price === "") {
+    res.statusCode = 400;
+    res.json({"status": "error", "message": "price is missing"});
+  } else {
+    next();
+  }
+};

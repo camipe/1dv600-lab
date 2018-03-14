@@ -275,6 +275,7 @@ describe("Automated API Tests", () => {
     it("respond new book object and status 201 Created", (done) => {
       request(app)
               .put('/api/books/')
+              .send(requestData)
               .set('Accept', 'application/json')
               .expect(201, requestData, done);
     });
@@ -283,8 +284,10 @@ describe("Automated API Tests", () => {
   describe("Automated API TEST 5 - Title is missing from request - PUT /api/books/", () => {
 
     it("respond with error message and status 400", (done) => {
+      requestData.title = "";
       request(app)
               .put('/api/books/')
+              .send(requestData)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "title is missing"}, done);
     });
@@ -293,8 +296,10 @@ describe("Automated API Tests", () => {
   describe("Automated API TEST 6 - Author is missing from request - PUT /api/books/", () => {
 
     it("respond with error message and status 400", (done) => {
+      requestData.author = "";
       request(app)
               .put('/api/books/')
+              .send(requestData)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "author is missing"}, done);
     });
@@ -302,9 +307,11 @@ describe("Automated API Tests", () => {
 
   describe("Automated API TEST 7 - Genre is missing from request - PUT /api/books/", () => {
 
-    it("rrespond with error message and status 400", (done) => {
+    it("respond with error message and status 400", (done) => {
+      requestData.genre = "";
       request(app)
               .put('/api/books/')
+              .send(requestData)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "genre is missing"}, done);
     });
@@ -313,8 +320,10 @@ describe("Automated API Tests", () => {
   describe("Automated API TEST 8 - Price is missing from request - PUT /api/books/", () => {
 
     it("respond with error message and status 400", (done) => {
+      requestData.price = "";
       request(app)
               .put('/api/books/')
+              .send(requestData)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "price is missing"}, done);
     });
@@ -323,8 +332,10 @@ describe("Automated API Tests", () => {
   describe("Automated API TEST 9 - Publish date is missing from request - PUT /api/books/", () => {
 
     it("respond with error message and status 400", (done) => {
+      requestData.publishDate = "";
       request(app)
               .put('/api/books/')
+              .send(requestData)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "publishDate is missing"}, done);
     });

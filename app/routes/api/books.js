@@ -10,6 +10,8 @@
     var GetBooksResource = require('../../resources/GetBooksResource');
     var RemoveBookResource = require('../../resources/RemoveBookResource');
 
+    var helpers = require('../../helpers');
+
 
 
     router.get('/', function (req, res) {
@@ -21,11 +23,11 @@
     });
 
 
-    router.put('/', function (req, res) {
+    router.put('/', helpers.validateBook, function (req, res) {
         res.type('json');
 
         AddBookResource(req.body, function () {
-            res.send(req.body);
+            res.send({});
         });
     });
 

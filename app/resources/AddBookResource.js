@@ -3,11 +3,12 @@
 
     var LibraryDAO = require('../dao/LibraryDAO');
 
-    var addBookToXML = ( xml, book ) => {
-        return xml;
-    };
-
     module.exports = function (data, callback) {
+        // validate data
+        // create book object
+        // convert to xml
+        // save to xml
+        // return book object
         callback();
     };
 

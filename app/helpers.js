@@ -55,11 +55,16 @@ exports.addBookToXML = ( xml, book, callback ) => {
       book.description
     ]
   }
-  console.log(xmlBook);
   xml.catalog.book.push(xmlBook);
-  console.log(xml.catalog.book);
   callback(xml);
 };
+
+exports.editBookinXML = (xml, book, callback) => {
+  var updatedXml = exports.removeBookFromXML(xml, book.id);
+  exports.addBookToXML(updatedXml, book, () => {
+    callback(xml);
+  });
+}
 
 exports.validateBook = ( req, res, next ) => {
 

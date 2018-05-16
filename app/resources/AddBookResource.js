@@ -3,7 +3,7 @@
 
     var LibraryDAO = require('../dao/LibraryDAO');
     var Book = require('../dao/Book');
-    var helpers = require('../helpers')
+    var helpers = require('../helpers');
 
     module.exports = function (data, callback) {
         LibraryDAO.readXMLFile((result) => {
@@ -19,7 +19,7 @@
             helpers.addBookToXML(result, book, function(xml){
                 LibraryDAO.writeXMLFile(xml);
                 callback(book);
-            })
+            });
         });
     };
 

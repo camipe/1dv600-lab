@@ -41,10 +41,10 @@
             });
         })
 
-        .post(function (req, res) {
+        .post(helpers.validateBook, function (req, res) {
             res.type('json');
-            EditBookResource(req.params.bookId, req.body, function () {
-                res.send("{}");
+            EditBookResource(req.params.bookId, req.body, function (data) {
+                res.send(data);
             });
         })
 

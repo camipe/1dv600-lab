@@ -61,8 +61,8 @@ exports.addBookToXML = ( xml, book, callback ) => {
 
 exports.editBookinXML = (xml, book, callback) => {
   var updatedXml = exports.removeBookFromXML(xml, book.id);
-  exports.addBookToXML(updatedXml, book, () => {
-    callback(xml);
+  exports.addBookToXML(updatedXml, book, (addedBookXml) => {
+    callback(addedBookXml);
   });
 }
 

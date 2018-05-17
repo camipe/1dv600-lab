@@ -24,8 +24,13 @@
 
         // Write the entire file to the file system.
         writeXMLFile: function(data) {
+
             var builder = new xml2js.Builder();
-            var xml = builder.buildObject(data);
+            try {
+                var xml = builder.buildObject(data);
+            } catch (error) {
+                console.log(error);
+            }
 
             fs.writeFile(process.env.PWD + '/books.xml', xml, function(err) {
                 if(err) {

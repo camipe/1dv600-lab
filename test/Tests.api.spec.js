@@ -6,9 +6,10 @@ var app = require("../app");
 describe("Automated API Tests", () => {
 
   var requestData;
+  fs.createReadStream(process.env.PWD + '/test/books_backup.xml').pipe(fs.createWriteStream(process.env.PWD + '/books.xml'));
   
   beforeEach(function(done) {
-    requestData = {
+    requestDataAdd = {
       "title": "The Hobbit",
       "author": "J.R.R. Tolkien",
       "genre": "Fantasy",
@@ -17,7 +18,15 @@ describe("Automated API Tests", () => {
       "description": "An hobbit on adventure."
     };
 
-    
+    requestDataEdit = {
+      "title": "Foundation",
+      "author": "Isaac Asimov",
+      "genre": "Science Ficition",
+      "publish_date": "1951-08-21",
+      "price": "164",
+      "description": "Robots and stuff"
+    };
+
     done();
   });
 
@@ -286,67 +295,147 @@ describe("Automated API Tests", () => {
     it("respond new book object and status 201 Created", (done) => {
       request(app)
               .put('/api/books/')
-              .send(requestData)
+              .send(requestDataAdd)
               .set('Accept', 'application/json')
               .expect(201, expected, done);
     });
   });
 
-  describe("Automated API TEST 5 - Title is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 5 - Add book -  Title is missing from request - PUT /api/books/", () => {
 
     it("respond with error message and status 400", (done) => {
-      requestData.title = "";
+      requestDataAdd.title = "";
       request(app)
               .put('/api/books/')
-              .send(requestData)
+              .send(requestDataAdd)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "title is missing"}, done);
     });
   });
 
-  describe("Automated API TEST 6 - Author is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 6 - Add book - Author is missing from request - PUT /api/books/", () => {
 
     it("respond with error message and status 400", (done) => {
-      requestData.author = "";
+      requestDataAdd.author = "";
       request(app)
               .put('/api/books/')
-              .send(requestData)
+              .send(requestDataAdd)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "author is missing"}, done);
     });
   });
 
-  describe("Automated API TEST 7 - Genre is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 7 - Add book - Genre is missing from request - PUT /api/books/", () => {
 
     it("respond with error message and status 400", (done) => {
-      requestData.genre = "";
+      requestDataAdd.genre = "";
       request(app)
               .put('/api/books/')
-              .send(requestData)
+              .send(requestDataAdd)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "genre is missing"}, done);
     });
   });
 
-  describe("Automated API TEST 8 - Price is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 8 - Add book - Price is missing from request - PUT /api/books/", () => {
 
     it("respond with error message and status 400", (done) => {
-      requestData.price = "";
+      requestDataAdd.price = "";
       request(app)
               .put('/api/books/')
-              .send(requestData)
+              .send(requestDataAdd)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "price is missing"}, done);
     });
   });
 
-  describe("Automated API TEST 9 - Publish date is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 9 - Add book - Publish date is missing from request - PUT /api/books/", () => {
 
     it("respond with error message and status 400", (done) => {
-      requestData.publishDate = "";
+      requestDataAdd.publishDate = "";
       request(app)
               .put('/api/books/')
-              .send(requestData)
+              .send(requestDataAdd)
+              .set('Accept', 'application/json')
+              .expect(400, {"status": "error", "message": "publishDate is missing"}, done);
+    });
+  });
+
+  describe("Automated API TEST 10 - Edit book successfully - POST /api/books/:id", () => {
+    var expected = {
+      "id": "1",
+      "title": "Foundation",
+      "author": "Isaac Asimov",
+      "genre": "Science Ficition",
+      "publishDate": "1951-08-21",
+      "price": "164",
+      "description": "Robots and stuff"
+    }
+
+    it("respond edited book object and status 200 OK", (done) => {
+      request(app)
+              .post('/api/books/1')
+              .send(requestDataEdit)
+              .set('Accept', 'application/json')
+              .expect(200, expected, done);
+    });
+  });
+
+  describe("Automated API TEST 11 - Edit book -  Title is missing from request - PUT /api/books/", () => {
+
+    it("respond with error message and status 400", (done) => {
+      requestDataEdit.title = "";
+      request(app)
+              .post('/api/books/1')
+              .send(requestDataEdit)
+              .set('Accept', 'application/json')
+              .expect(400, {"status": "error", "message": "title is missing"}, done);
+    });
+  });
+
+  describe("Automated API TEST 12 - Edit book - Author is missing from request - PUT /api/books/", () => {
+
+    it("respond with error message and status 400", (done) => {
+      requestDataEdit.author = "";
+      request(app)
+              .post('/api/books/1')
+              .send(requestDataEdit)
+              .set('Accept', 'application/json')
+              .expect(400, {"status": "error", "message": "author is missing"}, done);
+    });
+  });
+
+  describe("Automated API TEST 13 - Edit book - Genre is missing from request - PUT /api/books/", () => {
+
+    it("respond with error message and status 400", (done) => {
+      requestDataEdit.genre = "";
+      request(app)
+              .post('/api/books/1')
+              .send(requestDataEdit)
+              .set('Accept', 'application/json')
+              .expect(400, {"status": "error", "message": "genre is missing"}, done);
+    });
+  });
+
+  describe("Automated API TEST 14 - Edit book - Price is missing from request - PUT /api/books/", () => {
+
+    it("respond with error message and status 400", (done) => {
+      requestDataEdit.price = "";
+      request(app)
+              .post('/api/books/1')
+              .send(requestDataEdit)
+              .set('Accept', 'application/json')
+              .expect(400, {"status": "error", "message": "price is missing"}, done);
+    });
+  });
+
+  describe("Automated API TEST 15 - Edit book - Publish date is missing from request - PUT /api/books/", () => {
+
+    it("respond with error message and status 400", (done) => {
+      requestDataEdit.publishDate = "";
+      request(app)
+              .post('/api/books/1')
+              .send(requestDataEdit)
               .set('Accept', 'application/json')
               .expect(400, {"status": "error", "message": "publishDate is missing"}, done);
     });

@@ -18,7 +18,7 @@
 
             helpers.editBookinXML(result, book, (xml) => {
                 LibraryDAO.writeXMLFile(xml);
-                callback(book)
+                callback(book);
             });
         }));
     };

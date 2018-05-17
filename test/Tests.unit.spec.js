@@ -62,10 +62,17 @@ describe("Automated Unit Tests", () => {
       var xmlObject = data.short;
       var expectedResult = data.bookAdded;
 
-      var result = helpers.addBookToXML(xmlObject, book);
+      helpers.addBookToXML(xmlObject, book, (result) => {
+        expect(JSON.stringify(result)).to.equal(JSON.stringify(expectedResult));
+      });
+    });
+  });
 
-      expect(JSON.stringify(result)).to.equal(JSON.stringify(expectedResult));
+  // TODO: Unit test for edit book in 
+  describe("Unit Test 4 - editBookInXML", () => {
 
+    it("remove and add new book to object representation of XML-file", () => {
+      expect(true).to.equal(false);
     });
   });
 });

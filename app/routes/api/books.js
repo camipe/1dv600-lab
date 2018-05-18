@@ -43,7 +43,8 @@
 
         .post(helpers.validateBook, function (req, res) {
             res.type('json');
-            EditBookResource(req.params.bookId, req.body, function (data) {
+            EditBookResource(req.params.bookId, req.body, function (data, statusCode) {
+                res.statusCode = statusCode || 200
                 res.send(data);
             });
         })

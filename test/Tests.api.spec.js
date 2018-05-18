@@ -381,7 +381,18 @@ describe("Automated API Tests", () => {
     });
   });
 
-  describe("Automated API TEST 11 - Edit book -  Title is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 11 - Edit book -  Book does not exist - POST /api/books/:id", () => {
+
+    it("respond with error message and status 404", (done) => {
+      request(app)
+              .post('/api/books/99999')
+              .send(requestDataEdit)
+              .set('Accept', 'application/json')
+              .expect(404, {"status": "error", "message": "book does not exist"}, done);
+    });
+  });
+
+  describe("Automated API TEST 12 - Edit book -  Title is missing from request - POST /api/books/:id", () => {
 
     it("respond with error message and status 400", (done) => {
       requestDataEdit.title = "";
@@ -393,7 +404,7 @@ describe("Automated API Tests", () => {
     });
   });
 
-  describe("Automated API TEST 12 - Edit book - Author is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 13 - Edit book - Author is missing from request - POST /api/books/:id", () => {
 
     it("respond with error message and status 400", (done) => {
       requestDataEdit.author = "";
@@ -405,7 +416,7 @@ describe("Automated API Tests", () => {
     });
   });
 
-  describe("Automated API TEST 13 - Edit book - Genre is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 14 - Edit book - Genre is missing from request - POST /api/books/:id", () => {
 
     it("respond with error message and status 400", (done) => {
       requestDataEdit.genre = "";
@@ -417,7 +428,7 @@ describe("Automated API Tests", () => {
     });
   });
 
-  describe("Automated API TEST 14 - Edit book - Price is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 15 - Edit book - Price is missing from request - POST /api/books/:id", () => {
 
     it("respond with error message and status 400", (done) => {
       requestDataEdit.price = "";
@@ -429,7 +440,7 @@ describe("Automated API Tests", () => {
     });
   });
 
-  describe("Automated API TEST 15 - Edit book - Publish date is missing from request - PUT /api/books/", () => {
+  describe("Automated API TEST 16 - Edit book - Publish date is missing from request - POST /api/books/:id", () => {
 
     it("respond with error message and status 400", (done) => {
       requestDataEdit.publishDate = "";

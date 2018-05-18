@@ -11,7 +11,7 @@
             var statusCode;
             var updatedBooks;
 
-            var bookExists = helpers.checkIfBookExistsInXML(result, id, (bookExists) => {
+            helpers.checkIfBookExistsInXML(result, id, (bookExists) => {
                 if (bookExists === true) {
                     statusCode = 200;
                     updatedBooks = helpers.removeBookFromXML(result, id);
